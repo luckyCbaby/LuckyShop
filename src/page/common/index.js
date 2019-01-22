@@ -1,9 +1,8 @@
 /*
  * @Author: shijie
- * @Date:   2019-01-20 14:28:27
+ * @Date:   2019-01-22 16:08:09
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-01-20 15:59:26
+ * @Last Modified time: 2019-01-22 16:27:37
  */
-module.exports = {
-	name: 'shijie'
-}
+import './layout.css';
+import './header/index.js';

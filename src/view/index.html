@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%= require("html-loader!./layout/html-head.html") %>
-	<title></title>
+	<%= require("html-loader!./layout/head-common.html") %>
+	<title><%= htmlWebpackPlugin.options.title%></title>
 <body>
-	测试12
+	<%= require("html-loader!./layout/header.html") %>
 </body>
 </html>

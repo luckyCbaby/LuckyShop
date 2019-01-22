@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-01-21 21:34:24
+ * @Last Modified time: 2019-01-22 16:42:18
  */
 const path = require('path');
 //抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
@@ -17,7 +17,7 @@ var getHtmlCofig = function(name, title) {
 		//打包输出路径
 		filename: 'view/' + name + '.html',
 		title: title,
-		chunks: [name],
+		chunks: [name], //对应entry名字的
 		hash: true, //清缓存
 		//压缩html文件
 		// minify: {
@@ -32,7 +32,20 @@ module.exports = {
 	entry: {
 		'common': ['./src/page/common/index.js'],
 		'index': ['./src/page/index/index.js'],
-		'login': ['./src/page/login/index.js']
+		'user-login': ['./src/page/user-login/index.js'],
+		'user-register': ['./src/page/user-register/index.js'],
+		'user-center': ['./src/page/user-center/index.js'],
+		'user-center-update': ['./src/page/user-center-update/index.js'],
+		'user-pwd-reset': ['./src/page/user-pwd-reset/index.js'],
+		'user-pwd-update': ['./src/page/user-pwd-update/index.js'],
+		'product-detail': ['./src/page/product-detail/index.js'],
+		'cart': ['./src/page/cart/index.js'],
+		'about': ['./src/page/about/index.js'],
+		'order-detail': ['./src/page/order-detail/index.js'],
+		'order-list': ['./src/page/order-list/index.js'],
+		'order-confirm': ['./src/page/order-confirm/index.js'],
+		'order-payment': ['./src/page/order-payment/index.js'],
+		'result': ['./src/page/result/index.js'],
 	},
 	output: {
 		path: path.resolve('./dist'),
@@ -42,20 +55,25 @@ module.exports = {
 	module: {
 		rules: [{
 			test: /\.css$/,
-			use: [
-				MiniCssExtractPlugin.loader,
-				'css-loader'
-			]
+			loader: [MiniCssExtractPlugin.loader, 'css-loader']
 		}, {
 			test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/,
 			loader: 'url-loader?limit=100&name=resource/[name].[ext]'
 		}, {
 			test: /\.string$/,
 			use: 'html-loader'
+		}, {
+			test: /\.(js|jsx)?$/,
+			exclude: /(node_modules)/,
+			loader: 'babel-loader',
+			query: {
+				presets: ['es2015', 'env', 'react']
+			}
 		}]
 	},
 	//js代码抽离
 	optimization: {
+		//拆分模块
 		splitChunks: {
 			//缓存组
 			cacheGroups: {
@@ -91,9 +109,22 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: 'css/[name].css'
 		}),
-		new webpack.HotModuleReplacementPlugin(),
 		//html模块的处理
 		new getHtmlCofig('index', '主页'),
-		new getHtmlCofig('login', '登录页面')
+		new getHtmlCofig('user-login', '用户登录'),
+		new getHtmlCofig('user-register', '用户注册'),
+		new getHtmlCofig('user-center', '个人中心'),
+		new getHtmlCofig('user-center-update', '修改个人信息'),
+		new getHtmlCofig('user-pwd-reset', '找回密码'),
+		new getHtmlCofig('user-pwd-update', '修改密码'),
+		new getHtmlCofig('product-detail', '商品详情'),
+		new getHtmlCofig('product-list', '商品列表'),
+		new getHtmlCofig('cart', '购物车'),
+		new getHtmlCofig('about', '关于我们'),
+		new getHtmlCofig('order-detail', '订单详情'),
+		new getHtmlCofig('order-list', '订单列表'),
+		new getHtmlCofig('order-confirm', '订单支付'),
+		new getHtmlCofig('order-payment', '订单支付'),
+		new getHtmlCofig('result', '操作结果'),
 	]
 }
