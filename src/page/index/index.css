@@ -2,8 +2,102 @@
 * @Author: shijie
 * @Date:   2019-01-20 18:53:37
 * @Last Modified by:   shijie
-* @Last Modified time: 2019-01-22 21:15:24
+* @Last Modified time: 2019-02-17 22:31:54
 */
-body{
-	background: blue;
+
+/*左侧类别样式*/
+
+.keywords-list{
+	float: left;
+	width: 240px;
+	padding: 10px 0;
+	margin-right: 10px;
+	background: #666;
+	color: #fff;
+	height: 350px;
+}
+
+.keywords-list .keywords-item{
+	padding-left: 10px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+}
+/*鼠标放在link上的样式*/
+.keywords-list .keywords-item .link:hover{
+	color: #c60023;
+}
+/*link样式*/
+.keywords-list .keywords-item .link{
+	color: #fff;
+	margin-right: 6px;
+}
+
+.keywords-list .keywords-item:hover{
+	background: #999;
+}
+
+/*无限轮播图总容器样式*/
+.banner-con{
+    float: left;
+    position: relative;
+    width: 830px;
+    overflow: hidden;
+    height: 370px;
+    display: inline-block;
+}
+/*图片容器*/
+.banner-con .list{
+	float: left;
+}
+
+/*无限轮播图下面*/
+.floor-wrap{
+	overflow: hidden;
+}
+.floor-wrap .floor-title{
+	height: 50px;
+	line-height: 50px;
+	font-weight: normal;
+	font-size: 20px;
+	border-bottom: 1px solid #d58717;
+	color: #d58717;
+}
+
+.floor-wrap .floor-list{
+	margin-right: -20px;
+	overflow: hidden;
+}
+
+.floor-wrap .floor-list .floor-item{
+	/*这个容器的东西将相对于他定位*/
+	position: relative;
+    width: 200px;
+    height: 220px;
+    margin: 15px 20px 15px 0;
+    float: left;
+    cursor: pointer;
+    background: #fff;
+    transition: box-shadow .5s ease;
+}
+/*鼠标放上去的效果*/
+.floor-wrap .floor-list .floor-item:hover{
+	box-shadow: 1px 1px 7px #ddd;
+}
+
+.floor-wrap .floor-item .floor-text{
+	position: absolute;
+	top: 12px;
+	left: 20px;
+	font-size: 16px;
+	color: #555;
+}
+/*图片样式*/
+.floor-wrap .floor-item .floor-img{
+	position: absolute;
+	right: 15px;
+	bottom: 10px;
+	width: 80%;
+	height: 75%;
+	border: none;
 }
