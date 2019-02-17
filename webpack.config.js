@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-17 15:10:15
+ * @Last Modified time: 2019-02-17 17:26:48
  */
 const path = require('path');
 //抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
@@ -14,7 +14,7 @@ var getHtmlCofig = function(name, title) {
 	return new HtmlWebpackPlugin({
 		//匹配路径
 		template: './src/view/' + name + '.html',
-		favicon: './favicon.ico',
+		favicon: './favicon.ico', //favicon
 		//打包输出路径
 		filename: 'view/' + name + '.html',
 		title: title,
