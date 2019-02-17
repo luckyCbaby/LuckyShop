@@ -2,12 +2,14 @@
 * @Author: shijie
 * @Date:   2019-01-22 16:08:28
 * @Last Modified by:   shijie
-* @Last Modified time: 2019-02-17 19:56:06
+* @Last Modified time: 2019-02-17 21:20:13
 */
-
+*{
+	margin: 0;
+	padding:0;
+}
 
 /*通用头部导航*/
-
 
 /*logo样式*/
 .header .w .logo{
@@ -38,7 +40,7 @@
 /*搜索按钮样式*/
 .header .w .search-con .btn{
 	position: absolute;
-	height: 46px;
+	height: 44px;
 	width: 80px;
 	background: #c60023;
 	border: 2px solid #c60023;

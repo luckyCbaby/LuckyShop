@@ -1,0 +1,23 @@
+/*
+* @Author: shijie
+* @Date:   2019-02-17 22:45:38
+* @Last Modified by:   shijie
+* @Last Modified time: 2019-02-17 22:49:14
+*/
+.footer{
+	padding-bottom: 10px;
+}
+.footer .links{
+	text-align: center;  /*水平居中*/
+	color: #666;
+	line-height: 30px;
+}
+.footer .links .link{
+	padding: 0 10px;
+}
+
+.footer .copyright{
+	text-align:center;
+	color: #666;
+	line-height: 30px;
+}

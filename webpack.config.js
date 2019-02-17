@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-17 17:26:48
+ * @Last Modified time: 2019-02-17 19:09:49
  */
 const path = require('path');
 //抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
@@ -51,7 +51,8 @@ module.exports = {
 	output: {
 		path: path.resolve('./dist'),
 		filename: 'js/[name].js',
-		chunkFilename: 'js/[name].js'
+		chunkFilename: 'js/[name].js',
+		publicPath: 'http://localhost:8090/'
 	},
 	module: {
 		rules: [{
