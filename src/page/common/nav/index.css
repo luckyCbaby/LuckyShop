@@ -1,0 +1,44 @@
+/*
+* @Author: shijie
+* @Date:   2019-02-17 20:01:21
+* @Last Modified by:   shijie
+* @Last Modified time: 2019-02-17 20:36:57
+*/
+/*初始化样式 清除浏览器默认样式 实现兼容*/
+*{
+	margin: 0;
+	padding: 0;
+}
+/*上面导航条的样式*/
+
+
+/*外层容器样式*/
+.nav{
+	background: #eee;
+	height: 30px;
+	line-height: 30px;
+}
+
+/*用户部分*/
+.nav .user-info .user{
+	float: left;
+}
+/*没有登录的情况下隐藏欢迎您，， 退出*/
+.nav .user-info .user.login{
+	display: none;
+}
+
+/*所有link样式*/
+.nav .user .link{
+	margin-right: 5px;
+}
+
+/*导航链接样式*/
+.nav .nav-list{
+	float: right;
+}
+
+.nav .nav-list .nav-item{
+	display: inline-block;
+	margin-left: 5px;
+}
