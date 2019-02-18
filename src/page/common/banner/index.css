@@ -1,0 +1,88 @@
+/*
+* @Author: shijie
+* @Date:   2019-02-17 22:55:44
+* @Last Modified by:   shijie
+* @Last Modified time: 2019-02-18 15:25:03
+*/
+*{
+	margin: 0;
+	padding:0;
+	text-decoration: none;
+}
+
+
+
+#box{
+	width: 830px;
+	height: 370px;
+	/*里面的东西都相对于这个容器定位*/
+	position: relative;
+	overflow: hidden;
+}
+/*图片整体样式位置*/
+#list{
+	width: 830px;
+	height: 370px;
+	position: absolute;
+	z-index: 1;    /*z-index越小就被盖在下面*/
+}
+/*图片样式*/
+.img{
+	position: absolute;
+	height: 370px;
+	width: 830px;
+}
+
+.button{
+	position: absolute;
+    left: 45%;
+    bottom: 20px;
+    text-align: center;
+    z-index: 2;
+}
+
+.button span{
+	cursor: pointer;
+	float: left;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	height: 10px;
+	width: 10px;
+	margin-right: 5px;
+	background: #333;
+}
+/*正处于的圆点*/
+.button .on{
+	background: orange;
+}
+
+/*向前按钮*/
+#pre{
+	position: absolute;
+	cursor: pointer;
+	z-index: 2;
+	width: 20px;
+	height: 50px;
+	background: rgb(0,0,0,.3);
+	top: 50%;
+	transform: translateY(-50%) rotateY(180deg);
+}
+
+/*向后按钮*/
+#next{
+	position: absolute;
+	cursor: pointer;
+	z-index: 2;
+	width: 20px;
+	height: 50px;
+	top: 50%;
+	right: 0;
+	background: rgb(0,0,0,.3);
+	transform: translateY(-50%);
+}
+#pre:hover{
+	background: rgb(0,0,0,.7);
+}
+#next:hover{
+	background: rgb(0,0,0,.7);
+}
