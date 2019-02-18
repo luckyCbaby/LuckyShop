@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-18 21:22:48
+ * @Last Modified time: 2019-02-18 21:50:59
  */
 const path = require('path');
 //抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
@@ -18,7 +18,7 @@ var getHtmlCofig = function(name, title) {
 		//打包输出路径
 		filename: 'view/' + name + '.html',
 		title: title,
-		chunks: ['base', name], //对应entry名字的
+		chunks: ['base', 'common', name], //对应entry名字的
 		//压缩html文件
 		// minify: {
 		// 	removeAttributeQuotes: true, //删除属性的引号
@@ -102,6 +102,7 @@ module.exports = {
 					priority: 0 //webpack打包优先级
 
 				},
+
 				//优先拆分node_modules的模块，输出到vendor.js文件里，因为priority大
 				vendor: {
 					name: 'vendor',
