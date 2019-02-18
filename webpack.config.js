@@ -2,35 +2,33 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-18 21:50:59
+ * @Last Modified time: 2019-02-19 01:14:25
  */
+
+// webpack3的配置
 const path = require('path');
-//抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+// 环境变量, dev, (test), online
+const WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev';
+
 //多页配置函数封装
-var getHtmlCofig = function(name, title) {
-	return new HtmlWebpackPlugin({
-		//匹配路径
+
+function getHtmlCofig(name, title) {
+	return (new HtmlWebpackPlugin({
 		template: './src/view/' + name + '.html',
-		favicon: './favicon.ico', //favicon
-		//打包输出路径
 		filename: 'view/' + name + '.html',
+		favicon: './favicon.ico',
 		title: title,
-		chunks: ['base', 'common', name], //对应entry名字的
-		//压缩html文件
-		// minify: {
-		// 	removeAttributeQuotes: true, //删除属性的引号
-		// 	collapseWhitespace: true //删除空格
-		// }
-	})
+		chunks: ['common', name]
+	}))
 };
 
 
 module.exports = {
 	entry: {
-		'base': ['./src/page/common/index.js'],
+		'common': ['./src/page/common/index.js'],
 		'index': ['./src/page/index/index.js'],
 		'user-login': ['./src/page/user-login/index.js'],
 		'user-register': ['./src/page/user-register/index.js'],
@@ -53,17 +51,32 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'js/[name].js',
-		chunkFilename: 'js/[name].js',
 		publicPath: '/dist/'
 
 	},
 	module: {
-		rules: [{
-				test: /\.css$/,
-				use: [
-					MiniCssExtractPlugin.loader, 'css-loader'
-				]
+		rules: [
+			//react语法处理
+			{
+				test: /\.js$/,
+				exclude: /(node_modules)/, //这个目录下的文件不做处理
+				use: {
+					loader: 'babel-loader',
+					options: {
+						//env即environment，自动根据环境打包，不管是浏览器环境还是node环境
+						presets: ['es2015', 'env', 'react']
+					}
+				}
 			},
+			//css文件处理
+			{
+				test: /\.css$/,
+				use: ExtractTextWebpackPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader'
+				})
+			},
+
 			//图片及静态文件处理
 			{
 				test: /\.(png|jpg|gif)$/,
@@ -76,66 +89,39 @@ module.exports = {
 				}
 			}, {
 				test: /\.string$/,
-				use: 'html-loader'
-			}, {
-				test: /\.(js|jsx)?$/,
-				exclude: /(node_modules)/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['es2015', 'env', 'react']
-				}
+				loader: "html-loader"
 			}
 		]
 	},
-	//js代码抽离
-	optimization: {
-		//拆分模块
-		splitChunks: {
-			//缓存组
-			cacheGroups: {
-				//自动提取js,commons可以改
-				common: {
-					name: "common", //输出的文件名，对应output.chunkFilename
-					chunks: "all", //chunks有三个值，initial初始chunk,  async按需加载chunk, all 加载所有chunk
-					minChunks: 2, //其他入口文件引用次数最小值
-					minSize: 1, //公用代码的大小的最小值
-					priority: 0 //webpack打包优先级
 
-				},
-
-				//优先拆分node_modules的模块，输出到vendor.js文件里，因为priority大
-				vendor: {
-					name: 'vendor',
-					test: /[\\/]node_modules[\\/]/,
-					chunks: 'all',
-					priority: 10
-				}
-			}
+	//配置webpack-dev-server
+	devServer: {
+		contentBase: '/dist',
+		port: 8090,
+		open: true, //执行webpack-dev-server自动打开浏览器
+		//访问一个页面找不到会返回一个指定页面
+		historyApiFallback: {
+			index: '/dist/view/index.html'
 		}
 	},
-	//开发服务器
-	devServer: {
-		contentBase: './dist', //沿这个目录寻找模块,即执行webpack-dev-server打开的是dist这个目录
-		port: 8090, //自定义端口，默认8080
-		open: true, //执行webpack-dev-server自动打开浏览器
-		// compress: true, //服务器压缩
-		hot: true //热更新
-
-	},
 	resolve: {
+		//处理别名,
 		alias: {
-			node_modules: __dirname + '/node_modules',
-			util: __dirname + '/src/util',
-			page: __dirname + '/src/page',
-			service: __dirname + '/src/service',
-			image: __dirname + '/src/image'
+			//将绝对路径下的src/page取别名叫page
+			page: path.resolve(__dirname, 'src/page'),
+			view: path.resolve(__dirname, 'src/view'),
+			util: path.resolve(__dirname, 'src/util'),
+			service: path.resolve(__dirname, 'src/service'),
 		}
 	},
 	plugins: [
-		//单独抽离css文件
-		new MiniCssExtractPlugin({
-			filename: "css/[name].css"
+		// 独立通用模块到js/base.js
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'common',
+			filename: 'js/base.js'
 		}),
+		//把css单独打包到文件里
+		new ExtractTextWebpackPlugin("css/[name].css"),
 		//html模块的处理
 		new getHtmlCofig('index', '主页'),
 		new getHtmlCofig('user-login', '用户登录'),
