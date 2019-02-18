@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-18 18:10:05
+ * @Last Modified time: 2019-02-18 21:22:48
  */
 const path = require('path');
 //抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
@@ -25,7 +25,7 @@ var getHtmlCofig = function(name, title) {
 		// 	collapseWhitespace: true //删除空格
 		// }
 	})
-}
+};
 
 
 module.exports = {
@@ -39,6 +39,7 @@ module.exports = {
 		'user-pwd-reset': ['./src/page/user-pwd-reset/index.js'],
 		'user-pwd-update': ['./src/page/user-pwd-update/index.js'],
 		'product-detail': ['./src/page/product-detail/index.js'],
+		'product-list': ['./src/page/product-list/index.js'],
 		'cart': ['./src/page/cart/index.js'],
 		'about': ['./src/page/about/index.js'],
 		'order-detail': ['./src/page/order-detail/index.js'],
@@ -46,6 +47,8 @@ module.exports = {
 		'order-confirm': ['./src/page/order-confirm/index.js'],
 		'order-payment': ['./src/page/order-payment/index.js'],
 		'result': ['./src/page/result/index.js'],
+
+
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -149,5 +152,6 @@ module.exports = {
 		new getHtmlCofig('order-confirm', '订单支付'),
 		new getHtmlCofig('order-payment', '订单支付'),
 		new getHtmlCofig('result', '操作结果'),
+
 	]
 }

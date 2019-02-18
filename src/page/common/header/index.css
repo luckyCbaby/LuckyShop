@@ -2,7 +2,7 @@
 * @Author: shijie
 * @Date:   2019-01-22 16:08:28
 * @Last Modified by:   shijie
-* @Last Modified time: 2019-02-17 21:20:13
+* @Last Modified time: 2019-02-18 19:57:53
 */
 *{
 	margin: 0;
@@ -14,7 +14,7 @@
 /*logo样式*/
 .header .w .logo{
 	position: absolute;
-	left: 40px;
+	left: 25px;
 	top: 34px;
 	display: block;
 	font-size: 36px;
@@ -25,7 +25,7 @@
 
 /*搜索容器的样式*/
 .header .w .search-con{
-	padding: 40px 0 30px 300px;
+	padding: 40px 0 30px 250px;
 }
 /*搜索框样式*/
 .header .w .search-con .search-input{
