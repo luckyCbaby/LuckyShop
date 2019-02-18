@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-17 19:09:49
+ * @Last Modified time: 2019-02-18 18:10:05
  */
 const path = require('path');
 //抽离css文件的插件webpack4使用mini-css-extract-plugin  以前版本支持extract-text-webpack-plugin
@@ -19,7 +19,6 @@ var getHtmlCofig = function(name, title) {
 		filename: 'view/' + name + '.html',
 		title: title,
 		chunks: ['base', name], //对应entry名字的
-		hash: true, //清缓存
 		//压缩html文件
 		// minify: {
 		// 	removeAttributeQuotes: true, //删除属性的引号
@@ -49,31 +48,41 @@ module.exports = {
 		'result': ['./src/page/result/index.js'],
 	},
 	output: {
-		path: path.resolve('./dist'),
+		path: path.resolve(__dirname, 'dist'),
 		filename: 'js/[name].js',
 		chunkFilename: 'js/[name].js',
-		publicPath: 'http://localhost:8090/'
+		publicPath: '/dist/'
+
 	},
 	module: {
 		rules: [{
-			test: /\.css$/,
-			use: [
-				MiniCssExtractPlugin.loader, 'css-loader'
-			]
-		}, {
-			test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/,
-			loader: 'url-loader?limit=100&name=resource/[name].[ext]'
-		}, {
-			test: /\.string$/,
-			use: 'html-loader'
-		}, {
-			test: /\.(js|jsx)?$/,
-			exclude: /(node_modules)/,
-			loader: 'babel-loader',
-			query: {
-				presets: ['es2015', 'env', 'react']
+				test: /\.css$/,
+				use: [
+					MiniCssExtractPlugin.loader, 'css-loader'
+				]
+			},
+			//图片及静态文件处理
+			{
+				test: /\.(png|jpg|gif)$/,
+				use: {
+					loader: 'url-loader',
+					options: {
+						limit: 8192,
+						name: 'resource/[name].[ext]' //指定图片打包路径，[ext]表示它是什么后缀导出什么后缀
+					}
+				}
+			}, {
+				test: /\.string$/,
+				use: 'html-loader'
+			}, {
+				test: /\.(js|jsx)?$/,
+				exclude: /(node_modules)/,
+				loader: 'babel-loader',
+				query: {
+					presets: ['es2015', 'env', 'react']
+				}
 			}
-		}]
+		]
 	},
 	//js代码抽离
 	optimization: {
@@ -105,9 +114,18 @@ module.exports = {
 		contentBase: './dist', //沿这个目录寻找模块,即执行webpack-dev-server打开的是dist这个目录
 		port: 8090, //自定义端口，默认8080
 		open: true, //执行webpack-dev-server自动打开浏览器
-		compress: true, //服务器压缩
+		// compress: true, //服务器压缩
 		hot: true //热更新
 
+	},
+	resolve: {
+		alias: {
+			node_modules: __dirname + '/node_modules',
+			util: __dirname + '/src/util',
+			page: __dirname + '/src/page',
+			service: __dirname + '/src/service',
+			image: __dirname + '/src/image'
+		}
 	},
 	plugins: [
 		//单独抽离css文件

@@ -4,8 +4,8 @@
   "description": "LuckyShop前端代码",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "dist": "webpack"
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "dist": "node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
