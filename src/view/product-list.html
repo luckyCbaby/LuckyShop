@@ -2,13 +2,43 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<%= require("html-loader!./layout/head-common.html")%>
 	<title><%= htmlWebpackPlugin.options.title%> -- LuckyShop</title>
 </head>
 <body>
 	<%= require("html-loader!./layout/nav.html")%>
 	<%= require("html-loader!./layout/header.html")%>
-	<div>
-		<h1>商品列表</h1>
+	<div class="crumb">
+		<div class="w">
+			<div class="crumb-con">
+				<a href="./index.html" class="link">LuckyShop</a>
+				<span>></span>
+				<span class="link-text"><%= htmlWebpackPlugin.options.title%></span>
+			</div>
+		</div>
+		<div class="w">
+			<div class="page-wrap">
+				<url class="sort-con">
+					<!-- h5 自定义属性data- 前缀 -->
+					<li class="sort-item active" data-type="default">默认排序</li>
+					<li class="sort-item" data-type="price">
+						<span>价格</span>
+						<!-- 升序图标 -->
+						<i class="fa fa-sort-asc"></i>
+						<!-- 降序图标 -->
+						<i class="fa fa-sort-desc"></i>
+					</li>
+				</url>
+				<!-- 这里是容器，用来放string中的东西，请求回来的商品列表 -->
+				<ul class="p-list-con">
+						
+				</ul>
+				<!-- 分页容器 -->
+				<div class="pagination">
+					
+				</div>
+			</div>
+		</div>
 	</div>
 	<%= require("html-loader!./layout/footer.html")%>
 </body>

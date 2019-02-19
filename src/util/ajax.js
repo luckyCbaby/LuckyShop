@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-02-17 01:08:02
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-17 01:42:06
+ * @Last Modified time: 2019-02-19 20:26:00
  */
 
 class Ajax {
@@ -65,4 +65,4 @@ class Ajax {
 
 
 
-export default Ajax;
+module.exports = Ajax;

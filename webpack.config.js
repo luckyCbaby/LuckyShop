@@ -2,7 +2,7 @@
  * @Author: shijie
  * @Date:   2019-01-20 13:19:59
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-19 01:14:25
+ * @Last Modified time: 2019-02-19 18:23:29
  */
 
 // webpack3的配置
@@ -51,7 +51,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'js/[name].js',
-		publicPath: '/dist/'
+		publicPath: '/'
 
 	},
 	module: {
@@ -98,10 +98,18 @@ module.exports = {
 	devServer: {
 		contentBase: '/dist',
 		port: 8090,
-		open: true, //执行webpack-dev-server自动打开浏览器
-		//访问一个页面找不到会返回一个指定页面
-		historyApiFallback: {
-			index: '/dist/view/index.html'
+		// open: true, //执行webpack-dev-server自动打开浏览器
+		// //访问一个页面找不到会返回一个指定页面
+		// historyApiFallback: {
+		// 	index: '/dist/view/index.html'
+		// },
+		//服务器代理接口
+		proxy: {
+			//商品接口
+			'/product': {
+				target: "http://happymmall.com",
+				changeOrigin: true
+			}
 		}
 	},
 	resolve: {

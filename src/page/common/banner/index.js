@@ -2,9 +2,9 @@
  * @Author: shijie
  * @Date:   2019-02-17 22:55:50
  * @Last Modified by:   shijie
- * @Last Modified time: 2019-02-18 18:41:56
+ * @Last Modified time: 2019-02-19 00:06:25
  */
-import './index.css';
+require('./index.css');
 
 let index = 0;
 // 取出所有图片 得用querySelectorAll()
